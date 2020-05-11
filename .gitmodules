@@ -1,0 +1,3 @@
+[submodule "ticketing/sftickets-common"]
+	path = ticketing/sftickets-common
+	url = git@github.com:AlaguSelvan/sftickets-common.git
