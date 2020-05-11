@@ -3,9 +3,9 @@ import { body, validationResult } from 'express-validator';
 import jwt from 'jsonwebtoken';
 
 import { User } from '../models/User'
-import { RequestValidationError } from '../errors/request-validation-error';
-import { validateRequest } from '../middlewares/validate-request';
-import { BadRequestError } from '../errors/BadRequestError';
+import { RequestValidationError } from '@sftickets/common';
+import { validateRequest } from '@sftickets/common';
+import { BadRequestError } from '@sftickets/common';
 import { Password } from '../services/password';
 
 const router = express.Router()
