@@ -1,12 +1,15 @@
 import express, { Request, Response } from 'express';
-import { Ticket } from '../models/ticket';
+import { requireAuth } from '@sftickets/common';
+import { Orders } from '../models/orders';
 
 const router = express.Router();
 
-router.get('/api/tickets', async (req: Request, res: Response) => {
-  const tickets = await Ticket.find({});
+router.get('/api/orders', requireAuth, async (req: Request, res: Response) => {
+	const orders = await Orders.find({
+		userId: req.currentUser!.id
+	}).populate('ticket');
 
-  res.send(tickets);
+	res.send(orders);
 });
 
-export { router as indexTicketRouter };
+export { router as indexOrderRouter };

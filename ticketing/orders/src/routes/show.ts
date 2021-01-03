@@ -1,17 +1,15 @@
 import express, { Request, Response } from 'express';
-import { NotFoundError } from '@sftickets/common';
-import { Ticket } from '../models/ticket';
+import { NotAuthorizedError, NotFoundError, requireAuth } from '@sftickets/common'
+import { Orders } from '../models/orders';
 
 const router = express.Router();
 
-router.get('/api/tickets/:id', async (req: Request, res: Response) => {
-  const ticket = await Ticket.findById(req.params.id);
-
-  if (!ticket) {
-    throw new NotFoundError();
-  }
-
-  res.send(ticket);
+router.get('/api/orders/:orderId', requireAuth, async (req: Request, res: Response) => {
+	const {orderId} = req.params;
+  const order = await Orders.findById(orderId).populate('ticket');
+	if (!order) throw new NotFoundError();
+	if (order.userId !== req.currentUser!.id) throw new NotAuthorizedError();
+  res.send(order);
 });
 
-export { router as showTicketRouter };
+export { router as showOrderRouter };
