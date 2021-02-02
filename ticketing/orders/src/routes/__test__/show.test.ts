@@ -7,7 +7,7 @@ it('fetches the order', async () => {
 	// Create a ticket
 	const ticket = Ticket.build({
 		title: 'concert',
-		price: 20
+		price: 20,
 	})
 	ticket.save()
 

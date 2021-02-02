@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 import { body } from 'express-validator'
 import { BadRequestError, NotFoundError, OrderStatus, requireAuth, validateRequest } from '@sftickets/common'
 import { Ticket } from '../models/ticket';
-import { Orders } from '../models/orders';
+import { Order } from '../models/orders';
 import { natsWrapper } from '../nats-wrapper';
 import { OrderCreatedEventPublisher } from '../events/publisher/order-created-publisher';
 
@@ -34,7 +34,7 @@ router.post('/api/orders', requireAuth, validateRequest, [
 	expiration.setSeconds(expiration.getSeconds() + EXPIRATION_WINDOW_SECONDS)
 
 	// Build the order and save it to the database
-	const order = Orders.build({
+	const order = Order.build({
 		userId: req.currentUser!.id,
 		status: OrderStatus.Created,
 		expiresAt: expiration,
@@ -50,7 +50,8 @@ router.post('/api/orders', requireAuth, validateRequest, [
 		expiresAt: order.expiresAt.toISOString(),
 		ticket: {
 			id: ticketId,
-			price: ticket.price
+			price: ticket.price,
+			version: ticket.version
 		}
 	})
 

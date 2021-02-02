@@ -1,7 +1,6 @@
 import mongoose from 'mongoose'
 import request from 'supertest'
 import { app } from '../../app'
-import { Orders, OrderStatus } from '../../models/orders'
 import { Ticket } from '../../models/ticket'
 import { natsWrapper } from '../../nats-wrapper'
 
