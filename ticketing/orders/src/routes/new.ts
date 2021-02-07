@@ -35,7 +35,7 @@ router.post('/api/orders', requireAuth, validateRequest, [
 
 	// Build the order and save it to the database
 	const order = Order.build({
-		userId: req.currentUser!.id,
+		userId: req.currentUser?.id,
 		status: OrderStatus.Created,
 		expiresAt: expiration,
 		ticket
@@ -47,6 +47,7 @@ router.post('/api/orders', requireAuth, validateRequest, [
 		id: order.id,
 		status: order.status,
 		userId: order.userId,
+		version: order.version,
 		expiresAt: order.expiresAt.toISOString(),
 		ticket: {
 			id: ticketId,

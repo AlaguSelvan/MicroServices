@@ -13,13 +13,14 @@ router.delete('/api/orders/:orderId', requireAuth, async (req: Request, res: Res
 
 	if (!order) throw new NotFoundError();
 
-	if (order.userId !== req.currentUser!.id) throw new NotAuthorizedError();
+	if (order.userId !== req.currentUser?.id) throw new NotAuthorizedError();
 
 	order.status = OrderStatus.Cancelled
 	await order.save()
 
 	new OrderCancelledEventPublisher(natsWrapper.client).publish({
 		id: orderId,
+		version: order.version,
 		ticket: {
 			id: order.ticket.id
 		}
