@@ -50,9 +50,8 @@ router.post('/api/orders', requireAuth, validateRequest, [
 		version: order.version,
 		expiresAt: order.expiresAt.toISOString(),
 		ticket: {
-			id: ticketId,
-			price: ticket.price,
-			version: ticket.version
+			id: ticket.id,
+			price: ticket.price
 		}
 	})
 
