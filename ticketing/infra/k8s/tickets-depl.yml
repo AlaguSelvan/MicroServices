@@ -17,11 +17,19 @@ spec:
           image: alaguselvan14/tickets
           resources:
             limits:
-              memory: "128Mi"
-              cpu: "500m"
+              memory: "1024Mi"
+              cpu: "1000m"
           ports:
           - containerPort: 3000
           env:
+            - name: NATS_CLIENT_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: NATS_URL
+              value: 'http://nats-srv:4222'
+            - name: NATS_CLUSTER_ID
+              value: ticketing
             - name: MONGO_URI
               value: 'mongodb://tickets-mongo-srv:27017/tickets'
             - name: JWT_KEY
