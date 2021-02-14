@@ -17,8 +17,8 @@ spec:
           image: alaguselvan14/orders
           resources:
             limits:
-              memory: "1024Mi"
-              cpu: "1000m"
+              memory: "512Mi"
+              cpu: "500m"
           ports:
           - containerPort: 3000
           env:

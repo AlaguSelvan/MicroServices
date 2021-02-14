@@ -16,9 +16,6 @@ spec:
         - name: expiration
           image: alaguselvan14/expiration
           resources:
-            limits:
-              memory: "1024Mi"
-              cpu: "1000m"
           ports:
           - containerPort: 3000
           env:

@@ -17,8 +17,8 @@ spec:
         image: alaguselvan14/ticketing-client
         resources:
           limits:
-            memory: "512Mi"
-            cpu: "500m"
+            memory: "400Mi"
+            cpu: "300m"
         ports:
         - containerPort: 3000
 

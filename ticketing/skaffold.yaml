@@ -1,4 +1,4 @@
-apiVersion: skaffold/v2beta2
+apiVersion: skaffold/v2beta3
 kind: Config
 deploy:
   kubectl:
@@ -42,6 +42,14 @@ build:
             dest: .
     - image: alaguselvan14/expiration
       context: expiration
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
+    - image: alaguselvan14/payments
+      context: payments
       docker:
         dockerfile: Dockerfile
       sync:
