@@ -9,7 +9,7 @@ import { OrderCreatedEventPublisher } from '../events/publisher/order-created-pu
 
 const router = express.Router();
 
-const EXPIRATION_WINDOW_SECONDS = 15 * 60
+const EXPIRATION_WINDOW_SECONDS = 1 * 60
 
 router.post('/api/orders', requireAuth, validateRequest, [
 	body('ticketId').not().isEmpty().custom((input: string) => mongoose.Types.ObjectId.isValid(input)).withMessage('TicketId must be provided')
